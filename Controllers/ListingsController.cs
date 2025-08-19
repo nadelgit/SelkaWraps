@@ -2,26 +2,50 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SelkaWraps.Data;
+using SelkaWraps.Models.Listings;
 
 namespace SelkaWraps.Controllers
 {
     public class ListingsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ListingsController(ApplicationDbContext context)
+        public ListingsController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Listings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Listings.ToListAsync());
+            var data = await _context.Listings.ToListAsync();
+            //var viewdata = data.Select(q => new IndexVM
+            //{
+            //    Id = q.Id,
+            //    Category = q.Category,
+            //    CreatedAt = q.CreatedAt,
+            //    Description = q.Description,
+            //    Title = q.Title,
+            //    IsActive = q.IsActive,
+            //    Price = q.Price,
+            //    Quantity = q.Quantity,
+            //    Material = q.Material,
+            //    ImageUrl = q.ImageUrl,
+            //    UpdatedAt = q.UpdatedAt,
+            //    Orders = q.Orders
+
+
+            //});
+
+            var viewdata = _mapper.Map<List<IndexVM>>(data);
+            return View(viewdata);
         }
 
         // GET: Listings/Details/5
