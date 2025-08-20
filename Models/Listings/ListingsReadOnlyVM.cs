@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SelkaWraps.Models.Listings
 {
-    public class IndexVM
+    public class ListingsReadOnlyVM
     {
         public int Id { get; set; }
 

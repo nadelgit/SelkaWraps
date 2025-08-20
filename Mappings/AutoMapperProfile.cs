@@ -9,7 +9,7 @@ namespace SelkaWraps.Mappings
     {
         public AutoMapperProfile() 
         {
-            CreateMap<Listing, IndexVM>();
+            CreateMap<Listing, ListingsReadOnlyVM>();
         }
     }
 }

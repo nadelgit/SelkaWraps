@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SelkaWraps.Data;
 using SelkaWraps.Models.Listings;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SelkaWraps.Controllers
 {
@@ -44,7 +45,7 @@ namespace SelkaWraps.Controllers
 
             //});
 
-            var viewdata = _mapper.Map<List<IndexVM>>(data);
+            var viewdata = _mapper.Map<List<ListingsReadOnlyVM>>(data);
             return View(viewdata);
         }
 
@@ -63,7 +64,9 @@ namespace SelkaWraps.Controllers
                 return NotFound();
             }
 
-            return View(listing);
+            var viewdata = _mapper.Map<ListingsReadOnlyVM>(listing);
+
+            return View(viewdata);
         }
 
         // GET: Listings/Create
