@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SelkaWraps.Data;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SelkaWraps.Data
+namespace SelkaWraps.Models.Listings
 {
-    public class Listing
+    public class ListingsCreateVM
     {
-        public int Id { get; set; }
+      
 
         [Required, MaxLength(150)]
         public string Title { get; set; } = string.Empty;
@@ -26,6 +27,6 @@ namespace SelkaWraps.Data
         public DateTime? UpdatedAt { get; set; }
         public bool IsActive { get; set; } = true;
 
-       public ICollection<Order> Orders { get; set; } = new List<Order>();
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

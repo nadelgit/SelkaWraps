@@ -10,6 +10,7 @@ namespace SelkaWraps.Mappings
         public AutoMapperProfile() 
         {
             CreateMap<Listing, ListingsReadOnlyVM>();
+            CreateMap<ListingsCreateVM, Listing>();
         }
     }
 }

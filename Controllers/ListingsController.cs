@@ -80,15 +80,16 @@ namespace SelkaWraps.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Price,Quantity,Material,Category,ImageUrl,CreatedAt,UpdatedAt,IsActive")] Listing listing)
+        public async Task<IActionResult> Create(ListingsCreateVM listingCreateVM)
         {
             if (ModelState.IsValid)
             {
+                var listing = _mapper.Map<Listing>(listingCreateVM);
                 _context.Add(listing);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(listing);
+            return View(listingCreateVM);
         }
 
         // GET: Listings/Edit/5
