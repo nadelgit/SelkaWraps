@@ -11,6 +11,8 @@ namespace SelkaWraps.Mappings
         {
             CreateMap<Listing, ListingsReadOnlyVM>();
             CreateMap<ListingsCreateVM, Listing>();
+            CreateMap<ListingsEditVM, Listing>().ReverseMap();
+           
         }
     }
 }

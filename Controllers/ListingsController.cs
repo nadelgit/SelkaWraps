@@ -101,11 +101,12 @@ namespace SelkaWraps.Controllers
             }
 
             var listing = await _context.Listings.FindAsync(id);
+            var viewdata = _mapper.Map<ListingsEditVM>(listing);
             if (listing == null)
             {
                 return NotFound();
             }
-            return View(listing);
+            return View(viewdata);
         }
 
         // POST: Listings/Edit/5
@@ -113,9 +114,9 @@ namespace SelkaWraps.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Price,Quantity,Material,Category,ImageUrl,CreatedAt,UpdatedAt,IsActive")] Listing listing)
+        public async Task<IActionResult> Edit(int id, ListingsEditVM listingsEdit)
         {
-            if (id != listing.Id)
+            if (id != listingsEdit.Id)
             {
                 return NotFound();
             }
@@ -124,12 +125,13 @@ namespace SelkaWraps.Controllers
             {
                 try
                 {
+                    var listing = _mapper.Map<Listing>(listingsEdit);
                     _context.Update(listing);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ListingExists(listing.Id))
+                    if (!ListingExists(listingsEdit.Id))
                     {
                         return NotFound();
                     }
@@ -140,7 +142,7 @@ namespace SelkaWraps.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(listing);
+            return View(listingsEdit);
         }
 
         // GET: Listings/Delete/5
