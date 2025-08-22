@@ -159,8 +159,8 @@ namespace SelkaWraps.Controllers
             {
                 return NotFound();
             }
-
-            return View(listing);
+            var viewdata = _mapper.Map<ListingsReadOnlyVM>(listing);
+            return View(viewdata);
         }
 
         // POST: Listings/Delete/5

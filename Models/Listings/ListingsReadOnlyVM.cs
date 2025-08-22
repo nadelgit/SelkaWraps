@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SelkaWraps.Models.Listings
 {
-    public class ListingsReadOnlyVM
+    public class ListingsReadOnlyVM : BaseListingsVM
     {
-        public int Id { get; set; }
+       
 
         [Required, MaxLength(150)]
         public string Title { get; set; } = string.Empty;
